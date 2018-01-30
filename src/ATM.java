@@ -2,6 +2,7 @@
 
 
 public class ATM {
+private int thousands;
 private int hundreds ;
 private int fifties ;
 private int twenties ;
@@ -9,6 +10,7 @@ private int tens ;
 private int fives ;
 private int ones;
 public ATM(){
+	thousands = 10;
 	 hundreds = 10;
 	 fifties = 10;
 	 twenties = 10;
@@ -18,7 +20,7 @@ public ATM(){
 }
 	
 	public void R()
-	{
+	{ thousands = 10;
 		 hundreds = 10;
 		 fifties = 10;
 		 twenties = 10;
@@ -29,6 +31,7 @@ public ATM(){
 	
 	public void W(int withdrawl)
 	{
+		int thous = thousands;
 		 int xhund = hundreds;
 		 int xfif = fifties;
 		 int xtwe = twenties;
@@ -38,8 +41,17 @@ public ATM(){
 		 
 		 int initial = withdrawl;
 		 
+		 int tempMon = withdrawl/1000;
+		 if(thousands>=tempMon)
+		 {thousands = thousands - tempMon;
+		 withdrawl = withdrawl - (tempMon*1000);}
+		 else
+		 {
+			 withdrawl = withdrawl - (thousands*1000);
+			 thousands = 0;
+		 }
 		 
-		int tempMon = withdrawl / 100;
+		tempMon = withdrawl / 100;
 		if(hundreds>=tempMon)
 		{hundreds = hundreds - tempMon;
 		withdrawl = withdrawl - (tempMon * 100);
@@ -93,6 +105,7 @@ public ATM(){
 			{
 			System.out.println("Insufficient funds");
 			
+			thousands = thous;
 			hundreds = xhund;
 			fifties = xfif;
 			twenties = xtwe;
@@ -114,6 +127,9 @@ public ATM(){
 		for(int c = 0; c<request.length; c++)
 		{
 			request[c].trim();
+			
+		if(request[c].equals("$1000"))
+			System.out.println("$1000 - " + thousands);
 			
 		if (request[c].equals("$100"))
 		System.out.println("$100 - " + hundreds);
